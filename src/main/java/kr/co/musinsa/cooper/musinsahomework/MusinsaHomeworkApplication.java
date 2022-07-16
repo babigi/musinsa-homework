@@ -1,13 +1,13 @@
-package kr.co.musinsa.cooper.musinahomework;
+package kr.co.musinsa.cooper.musinsahomework;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MusinaHomeworkApplication {
+public class MusinsaHomeworkApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MusinaHomeworkApplication.class, args);
+        SpringApplication.run(MusinsaHomeworkApplication.class, args);
     }
 
 }

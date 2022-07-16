@@ -1,10 +1,10 @@
-package kr.co.musinsa.cooper.musinahomework;
+package kr.co.musinsa.cooper.musinsahomework;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MusinaHomeworkApplicationTests {
+class MusinsaHomeworkApplicationTests {
 
     @Test
     void contextLoads() {
