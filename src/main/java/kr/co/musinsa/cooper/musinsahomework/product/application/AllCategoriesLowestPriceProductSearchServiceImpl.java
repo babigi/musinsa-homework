@@ -7,7 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +24,26 @@ public class AllCategoriesLowestPriceProductSearchServiceImpl implements AllCate
                 = allCategoriesLowestPriceProductSearchRepository.searchAllCategoriesLowestPriceProduct();
 
         return AllCategoriesLowestPriceProductsResponseDto.create(
-                categoryLowestPriceProductsResponseDto,
+                filtrateDuplicateCategoryProduct(categoryLowestPriceProductsResponseDto),
                 getTotalPrice(categoryLowestPriceProductsResponseDto));
+    }
+
+    private List<CategoryLowestPriceProductResponseDto> filtrateDuplicateCategoryProduct(
+            List<CategoryLowestPriceProductResponseDto> categoryLowestPriceProducts
+    ) {
+        Set<String> categoryIds = new HashSet<>();
+
+        List<CategoryLowestPriceProductResponseDto> categoryLowestPriceSingleProducts = new ArrayList<>();
+
+        for (CategoryLowestPriceProductResponseDto categoryLowestPriceProduct : categoryLowestPriceProducts) {
+            String categoryName = categoryLowestPriceProduct.getCategory();
+            if (!categoryIds.contains(categoryName)) {
+                categoryLowestPriceSingleProducts.add(categoryLowestPriceProduct);
+                categoryIds.add(categoryName);
+            }
+        }
+
+        return categoryLowestPriceSingleProducts;
     }
 
     private BigDecimal getTotalPrice(List<CategoryLowestPriceProductResponseDto> categoryLowestPriceProductsResponseDto) {
