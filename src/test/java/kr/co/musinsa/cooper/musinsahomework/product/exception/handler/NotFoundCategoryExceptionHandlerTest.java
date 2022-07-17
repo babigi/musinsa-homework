@@ -1,9 +1,10 @@
-package kr.co.musinsa.cooper.musinsahomework.product.web;
+package kr.co.musinsa.cooper.musinsahomework.product.exception.handler;
 
 import kr.co.musinsa.cooper.musinsahomework.product.application.BrandMinAndMaxPriceService;
 import kr.co.musinsa.cooper.musinsahomework.product.application.LookupCategoryService;
 import kr.co.musinsa.cooper.musinsahomework.product.dto.BrandMinAndMaxPriceResponseDto;
 import kr.co.musinsa.cooper.musinsahomework.product.dto.BrandPriceResponseDto;
+import kr.co.musinsa.cooper.musinsahomework.product.web.CategoryBrandMinAndMaxPriceController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,14 +20,14 @@ import java.math.BigDecimal;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CategoryBrandMinAndMaxPriceController.class)
 @ExtendWith(MockitoExtension.class)
-class CategoryBrandMinAndMaxPriceControllerTest {
+class NotFoundCategoryExceptionHandlerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -37,9 +38,9 @@ class CategoryBrandMinAndMaxPriceControllerTest {
     @MockBean
     private LookupCategoryService lookupCategoryService;
 
-    @DisplayName("모든 카테고리의 상품을 한꺼번에 구매할 경우 최저가 및 브랜드 조회")
+    @DisplayName("잘못된 카테고리 입력값일 경우 예외를 반환한다")
     @Test
-    void getBrandMinAndMaxPrice() throws Exception {
+    void handleNotFoundCategoryException() throws Exception {
         //given
         BrandPriceResponseDto minBrandPrice
                 = new BrandPriceResponseDto("C", new BigDecimal("10000.00"));
@@ -53,21 +54,21 @@ class CategoryBrandMinAndMaxPriceControllerTest {
         given(brandMinAndMaxPriceService.getCategoryMinAndMaxPrice(any()))
                 .willReturn(brandMinAndMaxPriceResponseDto);
 
-        given(lookupCategoryService.existCategory(any())).willReturn(true);
+        given(lookupCategoryService.existCategory(any())).willReturn(false);
 
         //when
         ResultActions result = mockMvc.perform(
-                get("/api/v1/products/categories/{categoryName}/brands/min-max-price", "top")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON));
+                get("/api/v1/products/categories/{categoryName}/brands/min-max-price", "other-category")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON));
 
+        //then
         result.andExpectAll(
-                status().isOk(),
+                status().isBadRequest(),
                 content().contentType(MediaType.APPLICATION_JSON),
-                jsonPath("$.data.minBrandPrice.brandName").value("C"),
-                jsonPath("$.data.maxBrandPrice.brandName").value("I")
+                jsonPath("$.httpStatus").value("400"),
+                jsonPath("$.message").isNotEmpty()
         );
 
     }
-
 }
