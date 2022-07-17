@@ -17,8 +17,11 @@
 
 - Java11
 - Gradle
-- SpringBoot 2.7.1
+- SpringBoot
+  - Spring-Web
   - Spring-Data-JPA
+- QueryDSL
+- lombok
 - H2-database(RDB)
 
 <br>
