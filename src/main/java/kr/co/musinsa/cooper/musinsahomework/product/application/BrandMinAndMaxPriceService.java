@@ -4,5 +4,6 @@ import kr.co.musinsa.cooper.musinsahomework.product.dto.BrandMinAndMaxPriceRespo
 
 public interface BrandMinAndMaxPriceService {
 
-    BrandMinAndMaxPriceResponseDto getCategoryMinAndMaxPrice(String categoryName);
+    BrandMinAndMaxPriceResponseDto getCategoryMinAndMaxPrice(Long categoryId);
+
 }

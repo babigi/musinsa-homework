@@ -13,10 +13,10 @@ public class BrandMinAndMaxPriceServiceImpl implements BrandMinAndMaxPriceServic
     private final CategoryMinProductRepository categoryMinProductRepository;
     private final CategoryMaxProductRepository categoryMaxProductRepository;
 
-    public BrandMinAndMaxPriceResponseDto getCategoryMinAndMaxPrice(String categoryName) {
+    public BrandMinAndMaxPriceResponseDto getCategoryMinAndMaxPrice(Long categoryId) {
         return BrandMinAndMaxPriceResponseDto.create(
-                categoryMinProductRepository.getCategoryMinProduct(categoryName),
-                categoryMaxProductRepository.getCategoryMaxProduct(categoryName)
+                categoryMinProductRepository.getCategoryMinProduct(categoryId),
+                categoryMaxProductRepository.getCategoryMaxProduct(categoryId)
         );
     }
 

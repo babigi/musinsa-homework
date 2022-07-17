@@ -34,7 +34,7 @@ class CategoryMaxProductRepositoryTest {
     @DisplayName("카테고리의 브랜드 이름과 최고가를 조회한다")
     void getCategoryMaxProduct() {
         BrandPriceResponseDto brandPriceResponseDto
-                = categoryMaxProductRepository.getCategoryMaxProduct("top");
+                = categoryMaxProductRepository.getCategoryMaxProduct(1L);
 
         assertAll(
                 () -> assertThat(brandPriceResponseDto.getBrandName()).isEqualTo("I"),

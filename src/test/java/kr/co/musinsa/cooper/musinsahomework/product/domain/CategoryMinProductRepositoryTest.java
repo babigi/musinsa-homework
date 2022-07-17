@@ -33,7 +33,7 @@ class CategoryMinProductRepositoryTest {
     @DisplayName("카테고리의 브랜드 이름과 최저가를 조회한다")
     void getCategoryMinProduct() {
         BrandPriceResponseDto brandPriceResponseDto
-                = categoryMinProductRepository.getCategoryMinProduct("top");
+                = categoryMinProductRepository.getCategoryMinProduct(1L);
 
         assertAll(
                 () -> assertThat(brandPriceResponseDto.getBrandName()).isEqualTo("C"),

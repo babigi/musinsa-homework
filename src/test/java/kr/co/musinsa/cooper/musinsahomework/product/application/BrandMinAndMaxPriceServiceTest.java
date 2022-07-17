@@ -52,7 +52,7 @@ class BrandMinAndMaxPriceServiceTest {
 
         //when
         BrandMinAndMaxPriceResponseDto categoryMinAndMaxPrice
-                = brandMinAndMaxPriceService.getCategoryMinAndMaxPrice("top");
+                = brandMinAndMaxPriceService.getCategoryMinAndMaxPrice(1L);
 
         //then
         assertAll(

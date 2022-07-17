@@ -58,7 +58,7 @@ class NotFoundCategoryExceptionHandlerTest {
 
         //when
         ResultActions result = mockMvc.perform(
-                get("/api/v1/products/categories/{categoryName}/brands/min-max-price", "other-category")
+                get("/api/v1/products/categories/{categoryId}/brands/min-max-price", 13L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON));
 

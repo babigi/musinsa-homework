@@ -18,11 +18,11 @@ public class CategoryMaxProductRepositoryImpl implements CategoryMaxProductRepos
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public BrandPriceResponseDto getCategoryMaxProduct(String categoryName) {
+    public BrandPriceResponseDto getCategoryMaxProduct(Long categoryId) {
         return jpaQueryFactory.select(Projections.constructor(BrandPriceResponseDto.class,
                         product.brand.name, product.price))
                 .from(product)
-                .where(product.category.name.eq(categoryName))
+                .where(product.category.id.eq(categoryId))
                 .innerJoin(product.category, category)
                 .innerJoin(product.brand, brand)
                 .groupBy(category, brand)

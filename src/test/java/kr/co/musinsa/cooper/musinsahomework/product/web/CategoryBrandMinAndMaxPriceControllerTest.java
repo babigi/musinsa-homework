@@ -57,7 +57,7 @@ class CategoryBrandMinAndMaxPriceControllerTest {
 
         //when
         ResultActions result = mockMvc.perform(
-                get("/api/v1/products/categories/{categoryName}/brands/min-max-price", "top")
+                get("/api/v1/products/categories/{categoryId}/brands/min-max-price", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 

@@ -32,8 +32,8 @@ class LookUpCategoryRepositoryTest {
     void existCategory() {
 
         assertAll(
-                () -> assertThat(lookUpCategoryRepository.existCategory("outer")).isTrue(),
-                () -> assertThat(lookUpCategoryRepository.existCategory("other")).isFalse()
+                () -> assertThat(lookUpCategoryRepository.existCategory(2L)).isTrue(),
+                () -> assertThat(lookUpCategoryRepository.existCategory(1000L)).isFalse()
         );
     }
 

@@ -11,8 +11,8 @@ public class LookUpCategoryServiceImpl implements LookupCategoryService {
     private final LookUpCategoryRepository lookUpCategoryRepository;
 
     @Override
-    public boolean existCategory(String categoryName) {
-        return lookUpCategoryRepository.existCategory(categoryName);
+    public boolean existCategory(Long categoryId) {
+        return lookUpCategoryRepository.existCategory(categoryId);
     }
 
 }

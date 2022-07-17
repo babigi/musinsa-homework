@@ -14,9 +14,9 @@ public class LookUpCategoryRepositoryImpl implements LookUpCategoryRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public boolean existCategory(String categoryName) {
+    public boolean existCategory(Long categoryId) {
         return jpaQueryFactory.selectFrom(category)
-                .where(category.name.eq(categoryName))
+                .where(category.id.eq(categoryId))
                 .fetchFirst() != null;
     }
 

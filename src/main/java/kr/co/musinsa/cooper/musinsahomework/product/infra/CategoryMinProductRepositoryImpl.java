@@ -18,11 +18,11 @@ public class CategoryMinProductRepositoryImpl implements CategoryMinProductRepos
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public BrandPriceResponseDto getCategoryMinProduct(String categoryName) {
+    public BrandPriceResponseDto getCategoryMinProduct(Long categoryId) {
         return jpaQueryFactory.select(Projections.constructor(BrandPriceResponseDto.class,
                         product.brand.name, product.price))
                 .from(product)
-                .where(product.category.name.eq(categoryName))
+                .where(product.category.id.eq(categoryId))
                 .innerJoin(product.category, category)
                 .innerJoin(product.brand, brand)
                 .groupBy(category, brand)

@@ -21,16 +21,16 @@ public class CategoryBrandMinAndMaxPriceController {
     private final BrandMinAndMaxPriceService brandMinAndMaxPriceService;
     private final LookupCategoryService lookupCategoryService;
 
-    @GetMapping("/categories/{categoryName}/brands/min-max-price")
+    @GetMapping("/categories/{categoryId}/brands/min-max-price")
     public ResponseEntity<ApiResult<BrandMinAndMaxPriceResponseDto>> getBrandMinAndMaxPrice(
-            @PathVariable String categoryName
+            @PathVariable Long categoryId
     ) {
-        if (!lookupCategoryService.existCategory(categoryName)) {
-            throw new NotFoundCategoryException(categoryName);
+        if (!lookupCategoryService.existCategory(categoryId)) {
+            throw new NotFoundCategoryException(categoryId);
         }
 
         BrandMinAndMaxPriceResponseDto categoryMinAndMaxPriceResponseDto
-                = brandMinAndMaxPriceService.getCategoryMinAndMaxPrice(categoryName);
+                = brandMinAndMaxPriceService.getCategoryMinAndMaxPrice(categoryId);
 
         ApiResult<BrandMinAndMaxPriceResponseDto> apiResult
                 = ApiResult.success(categoryMinAndMaxPriceResponseDto, HttpStatus.OK);
