@@ -4,6 +4,7 @@ import kr.co.musinsa.cooper.musinsahomework.product.domain.AllCategoriesLowestPr
 import kr.co.musinsa.cooper.musinsahomework.product.dto.AllCategoriesLowestPriceProductsResponseDto;
 import kr.co.musinsa.cooper.musinsahomework.product.dto.CategoryLowestPriceProductResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ public class AllCategoriesLowestPriceProductSearchServiceImpl implements AllCate
     private final AllCategoriesLowestPriceProductSearchRepository allCategoriesLowestPriceProductSearchRepository;
 
     @Override
+    @Cacheable(cacheNames = "allCategoriesLowestPriceProducts")
     public AllCategoriesLowestPriceProductsResponseDto searchAllCategoriesLowestPriceProducts() {
         List<CategoryLowestPriceProductResponseDto> categoryLowestPriceProductsResponseDto
                 = allCategoriesLowestPriceProductSearchRepository.searchAllCategoriesLowestPriceProduct();

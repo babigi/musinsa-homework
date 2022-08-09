@@ -4,11 +4,12 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
 @ToString
-public class CategoryLowestPriceProductResponseDto {
+public class CategoryLowestPriceProductResponseDto implements Serializable {
 
     private final String category;
     private final String brand;
